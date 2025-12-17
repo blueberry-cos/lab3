@@ -1,0 +1,23 @@
+
+$file = "C:\processes.txt"
+
+
+$processes = Get-Process | 
+    Where-Object { $_.Id -gt 100 } | 
+    Select-Object Name, Id, PriorityClass, 
+        @{Name="UserProcessorTime(sec)"; Expression={[math]::Round($_.UserProcessorTime.TotalSeconds, 2)}},
+        @{Name="TotalProcessorTime(sec)"; Expression={[math]::Round($_.TotalProcessorTime.TotalSeconds, 2)}} |
+    Sort-Object @{Expression={$_.'TotalProcessorTime(sec)'}; Ascending=$true}
+
+
+$processes | Format-Table -AutoSize | Out-File $file
+
+
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "СОЗДАН ФАЙЛ: $file" -ForegroundColor Green
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "Найдено процессов с Id > 100: $($processes.Count)" -ForegroundColor Yellow
+Write-Host "Отсортировано по TotalProcessorTime (возрастание)" -ForegroundColor White
+Write-Host "`nПримеры процессов:" -ForegroundColor Magenta
+
+$processes | Select-Object -First 5 | Format-Table
