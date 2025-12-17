@@ -1,0 +1,7 @@
+
+Get-ChildItem -Directory 
+? {$_.Name -match '[ST]$'} 
+sort Name 
+ConvertTo-Html -Property Name, CreationTime, LastWriteTime 
+Out-File C:\folders.html; 
+Write-Host "Файл создан: C:\folders.html"
