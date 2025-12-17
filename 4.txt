@@ -1,0 +1,3 @@
+Get-ChildItem "C:\Windows" - Directory
+Where-Object {$_/Name -match '[ST]$}
+Sort-Object Name
