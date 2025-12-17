@@ -1,0 +1,7 @@
+
+$dir = Measure-Command {Get-ChildItem C:\Windows -ErrorAction SilentlyContinue}
+
+$ps = Measure-Command {Get-Process}
+
+Write-Host "DIR: $($dir.TotalMilliseconds) мс" -ForegroundColor Green
+Write-Host "PS: $($ps.TotalMilliseconds) мс" -ForegroundColor Green
