@@ -1,0 +1,7 @@
+$files = Get-ChildItem "C:\Windows" -Include *.bmp,*.jpg -Recurse -ErrorAction SilentlyContinue
+
+$total = $files  
+Measure-Object -Property Length -Sum
+
+$totalGB = $total.Sum / 1GB
+$totalGB
