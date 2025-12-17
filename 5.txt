@@ -1,0 +1,13 @@
+$process = Get-Process | Select-Object -First 1
+
+
+$properties = $process | Get-Member -MemberType Property | Select-Object -ExpandProperty Name
+
+
+$file = "C:\process_properties.txt"
+$properties | Out-File -FilePath $file
+
+
+$count = $properties.Count
+Write-Host "Общее количество свойств процесса: $count" -ForegroundColor Green
+Write-Host "Список сохранен в файл: $file" -ForegroundColor Yellow
